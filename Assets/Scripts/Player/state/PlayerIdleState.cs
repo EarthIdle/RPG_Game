@@ -22,5 +22,8 @@ public class PlayerIdleState : PlayerState
     public override void update()
     {
         base.update();
+
+        if (xInput != 0)
+            stateMachine.ChangeState(player.moveState);
     }
 }
