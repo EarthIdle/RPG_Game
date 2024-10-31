@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerIdleState : PlayerState
+public class PlayerIdleState : PlayerGroundState
 {
     public PlayerIdleState(Player _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
@@ -12,6 +12,8 @@ public class PlayerIdleState : PlayerState
     public override void Enter()
     {
         base.Enter();
+
+        player.ZeroVelocity();
     }
 
     public override void Exit()
@@ -23,7 +25,7 @@ public class PlayerIdleState : PlayerState
     {
         base.update();
 
-        if (xInput != 0)
+        if (xInput != 0 && !player.isBusy)
             stateMachine.ChangeState(player.moveState);
     }
 }
